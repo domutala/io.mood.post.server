@@ -1,13 +1,11 @@
-import * as dotenv from "dotenv";
-import * as db from "./db";
-import * as server from "./express";
+import * as data from "./data";
+import * as server from "./server";
 
 (async () => {
-  dotenv.config();
-
-  db.init()
-    .then(() => server.init({ port: 6070 }))
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    await data.init();
+    await server.init();
+  } catch (error) {
+    console.log(error);
+  }
 })();
