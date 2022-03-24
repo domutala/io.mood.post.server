@@ -3,7 +3,7 @@ import * as express from "express";
 import * as cors from "cors";
 import * as bodyParser from "body-parser";
 import * as os from "os";
-import fileUpload from "express-fileupload";
+import * as fileUpload from "express-fileupload";
 
 export const init = async () => {
   // démarer le server
@@ -53,5 +53,5 @@ export const init = async () => {
 
   console.log("\x1b[0m", "");
 
-  return server;
+  return { server, app };
 };

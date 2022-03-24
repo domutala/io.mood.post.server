@@ -3,5 +3,6 @@ dist
 build
 yarn.lock
 yarn.error
+firbase.json
 
 .env

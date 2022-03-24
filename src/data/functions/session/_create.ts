@@ -5,10 +5,10 @@ import funcs from ".";
 
 export default async ({ token }: { token?: string }) => {
   let _session: Session;
-  _session = await funcs.get({ filter: { token: token } });
+  if (token) _session = await funcs.get({ filter: { token: token } });
 
-  // si aucun App existe, création
-  // d'une nouvelle App
+  /// si aucun App existe, création
+  /// d'une nouvelle App
   if (!_session) {
     _session = new Session();
     _session.token = u_token.generate_0();
@@ -16,5 +16,5 @@ export default async ({ token }: { token?: string }) => {
 
   await _session.save();
 
-  return { value: _session.token };
+  return _session.token;
 };

@@ -13,4 +13,15 @@ export const generate_0 = (
   return token.generate();
 };
 
-export default { generate_0 };
+export const generate_1 = (
+  { length }: { length?: number } = { length: 50 }
+) => {
+  let random = Math.random().toString();
+
+  random = random.split(".")[1];
+  random = random.slice(0, length - 1);
+
+  return random;
+};
+
+export default { generate_0, generate_1 };

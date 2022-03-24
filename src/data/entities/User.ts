@@ -13,11 +13,23 @@ export class User extends BaseEntity {
   @ObjectIdColumn()
   id: ObjectID;
 
-  @Column({ type: "string" })
+  @Column()
   name: string;
+
+  @Column()
+  username: string;
 
   @Column({ nullable: true })
   avatar: string;
+
+  @Column({ nullable: true })
+  uid: string;
+
+  @Column({ nullable: true })
+  email: string;
+
+  @Column({ nullable: true })
+  phone: string;
 
   @Column()
   @CreateDateColumn()

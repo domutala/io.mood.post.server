@@ -1,4 +1,5 @@
 import { User } from "../../entities/User";
+import u_token from "../../../utils/token";
 import user_funcs from "./index";
 
 /**
@@ -18,7 +19,27 @@ export default async (user: User) => {
   }
 
   /// Créer un nouvel utilisateur s'il n'existe pas
-  if (!_user) _user = new User();
+  if (!user) {
+    _user = new User();
+    _user.name = user.name || (user as any).displayName;
+    _user.uid = user.uid;
+    _user.email = user.email;
+
+    /// création d'un nom d'utilisateur
+    const username = _user.name.split(" ").join("_");
+    let isDispo = false;
+    let sufix = "";
+
+    while (!isDispo) {
+      const usrn = `${username}_${sufix}`;
+      const u = await user_funcs.find({ filter: { username: usrn } });
+
+      isDispo = u.length !== 0;
+      if (!isDispo) sufix = u_token.generate_1();
+    }
+
+    _user.username = `${username}_${sufix}`;
+  }
 
   await _user.save();
 
